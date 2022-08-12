@@ -1,4 +1,5 @@
 import { Navigate, useOutlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import styles from "../css/Layout.module.css";
 
@@ -16,7 +17,7 @@ import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
 const OtoLogged = () => {
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const { user } = useSelector((state) => ({ ...state.auth }));
   const outlet = useOutlet();
 
   if (!user) {

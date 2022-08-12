@@ -1,4 +1,5 @@
 import { Navigate, useOutlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import styles from "../css/Layout.module.css";
 
@@ -17,7 +18,10 @@ import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFi
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 
 const DlxLogged = () => {
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const { user } = useSelector((state) => ({
+    ...state.auth,
+  }));
+
   const outlet = useOutlet();
 
   if (!user) {

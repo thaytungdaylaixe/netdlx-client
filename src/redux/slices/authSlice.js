@@ -1,11 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postData } from "../api";
 
-// import Cookies from "js-cookie";
-
-// Cookies.get('name') // => 'value'
-// localStorage.getItem("mytime");
-
 export const login = createAsyncThunk(
   "auth/login",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
@@ -43,7 +38,7 @@ export const register = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: null,
+    user: JSON.parse(localStorage.getItem("profile")),
     error: "",
     loading: false,
   },

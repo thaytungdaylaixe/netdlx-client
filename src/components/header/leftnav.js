@@ -20,7 +20,9 @@ export default function LeftNav(props) {
   const hoten = (hovaten) => {
     if (hovaten) {
       const myArray = hovaten.split(" ");
-      return myArray[0] + " " + myArray[myArray.length - 1];
+      return myArray.length > 1
+        ? myArray[0] + " " + myArray[myArray.length - 1]
+        : myArray[0];
     }
   };
 

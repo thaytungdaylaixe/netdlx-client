@@ -8,6 +8,7 @@
     "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.3",
+    "@mui/x-date-pickers": "^5.0.0-beta.5",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
@@ -29,8 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku": "git add . && git commit -am \"make it better\" && git push heroku head:master"
-    // https://github.com/mars/create-react-app-buildpack.git
+    "git": "git add . && git commit -am \"Ok\" && git push heroku head:master && git push"
   },
   "eslintConfig": {
     "extends": [

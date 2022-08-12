@@ -1,7 +1,3 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setUser } from "./redux/slices/authSlice";
-
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -22,7 +18,8 @@ import Settings from "./pages/Settings";
 
 import DlxLogged from "./components/dlx/DlxLogged";
 import DlxHome from "./pages/dlx/DlxHome";
-import Hocvien from "./pages/Hocvien";
+import Hocvien from "./components/dlx/hocvien/HocVien";
+import HvAddEdit from "./components/dlx/hocvien/HvAddEdit";
 
 import NdLogged from "./components/nhadat/NdLogged";
 import NdHome from "./pages/nhadat/NdHome";
@@ -34,13 +31,6 @@ import OtoAddEdit from "./pages/oto/OtoAddEdit";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
-  const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
-
-  useEffect(() => {
-    dispatch(setUser(user));
-  });
-
   return (
     <BrowserRouter>
       <ToastContainer
@@ -77,6 +67,8 @@ function App() {
         <Route path="/daylaixe" element={<DlxLogged />}>
           <Route path="" element={<DlxHome />} />
           <Route path="hocvien" element={<Hocvien />} />
+          <Route path="add" element={<HvAddEdit />} />
+          <Route path="edit/:id" element={<HvAddEdit />} />
         </Route>
 
         <Route path="/nhadat" element={<NdLogged />}>

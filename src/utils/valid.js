@@ -1,3 +1,7 @@
+export const trimText = (text) => {
+  return text.replace(/^\s+|\s+$/gm, "").replace(/\s\s+/g, " ");
+};
+
 function validateNumber(sdt) {
   const re = /^[0-9]*$/gm;
   return re.test(sdt);

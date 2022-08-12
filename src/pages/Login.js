@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Input from "../components/form/Input";
-import { Valid, ValidDangNhap } from "../utils/valid";
+import { trimText, Valid, ValidDangNhap } from "../utils/valid";
 import { login } from "../redux/slices/authSlice";
 
 const theme = createTheme();
@@ -43,7 +43,10 @@ const Login = () => {
     await dispatch(login({ formValue, navigate, toast }));
   };
 
-  const inputChange = ({ name, value }) => {
+  const inputChange = (data) => {
+    const name = trimText(data.name);
+    const value = trimText(data.value);
+
     if (Valid(name, value) === null) {
       if (errors) {
         const newErrors = { ...errors };

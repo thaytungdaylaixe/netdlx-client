@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import Input from "../components/form/Input";
-import { Valid, ValidDangky } from "../utils/valid";
+import { trimText, Valid, ValidDangky } from "../utils/valid";
 import { register } from "../redux/slices/authSlice";
 import Select from "../components/form/Select";
 
@@ -48,7 +48,10 @@ const Register = () => {
 
   const [errors, setErrors] = useState({});
 
-  const inputChange = ({ name, value }) => {
+  const inputChange = (data) => {
+    const name = trimText(data.name);
+    const value = trimText(data.value);
+
     if (Valid(name, value) === null) {
       if (errors) {
         const newErrors = { ...errors };

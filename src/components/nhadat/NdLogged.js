@@ -15,7 +15,7 @@ import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFi
 
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
-const Logged = () => {
+const NdLogged = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const outlet = useOutlet();
 
@@ -72,4 +72,4 @@ const Logged = () => {
   );
 };
 
-export default Logged;
+export default NdLogged;

@@ -1,4 +1,5 @@
 import { Navigate, useOutlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import styles from "../css/Layout.module.css";
 
@@ -18,7 +19,7 @@ import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
 const Logged = () => {
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const { user } = useSelector((state) => ({ ...state.auth }));
   const outlet = useOutlet();
 
   if (!user) {
@@ -27,11 +28,6 @@ const Logged = () => {
 
   const MenuItems = {
     left: [
-      {
-        text: "Trang chủ",
-        link: "/",
-        icon: <HomeOutlinedIcon />,
-      },
       {
         text: "Dạy lái xe",
         link: "/daylaixe",
@@ -48,11 +44,6 @@ const Logged = () => {
         icon: <DirectionsCarFilledOutlinedIcon />,
       },
       { divider: true },
-      {
-        text: "Học viên",
-        link: "/dashboard/hocvien",
-        icon: <PeopleOutlinedIcon />,
-      },
     ],
     right: [
       {
