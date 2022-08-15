@@ -1,15 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postData } from "../api";
 
-export const createSanhoc = createAsyncThunk(
+// export const updateData = createAsyncThunk('data/update', async (params, {dispatch}) => {
+//   const result = await sdkClient.update({ params })
+//   dispatch(getData())
+//   return result
+// })
+
+export const createData = createAsyncThunk(
   "datadlx/createSanhoc",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
     try {
+      const { name, label } = formValue;
       const response = await postData("/dlx/createdata", formValue);
 
-      toast.success("Tour Added Successfully");
+      const { data } = response;
+
+      toast.success("Thêm " + label + " thành công.");
       navigate("/daylaixe/add");
-      return response.data;
+      return { name, data };
     } catch (err) {
       console.log(err);
       return rejectWithValue(err.response.data);
@@ -23,7 +32,6 @@ export const getAllByUser = createAsyncThunk(
     try {
       const response = await postData("/dlx/getall", { idUser });
 
-      // console.log("response", response.data);
       return response.data;
     } catch (err) {
       console.log(err);
@@ -32,14 +40,19 @@ export const getAllByUser = createAsyncThunk(
   }
 );
 
-export const dlx = createAsyncThunk(
-  "datadlx/dlx",
-  async ({ formValue }, { rejectWithValue }) => {
+export const deleteByUser = createAsyncThunk(
+  "datadlx/deleteByUser",
+  async ({ formValue, navigate, toast }, { dispatch, rejectWithValue }) => {
     try {
-      const response = await postData("/dlx/getall", formValue);
+      await postData("/dlx/deletedata", formValue);
 
-      return response.data;
+      await dispatch(deleteDataDlx(formValue));
+
+      toast.success("Xóa " + formValue.value + " thành công.");
+
+      return;
     } catch (err) {
+      console.log(err);
       return rejectWithValue(err.response.data);
     }
   }
@@ -56,22 +69,33 @@ const dlxSlice = createSlice({
     loading: false,
   },
   reducers: {
-    setSanhoc: (state, action) => {
-      state.sanhoc = action.payload;
+    setDataDlx: (state, action) => {
+      state[action.payload.name] = action.payload;
     },
-    pushSanhoc: (state, action) => {
-      state.sanhoc = [...state.sanhoc, action.payload];
+    pushDataDlx: (state, action) => {
+      state[action.payload.name] = [
+        ...state[action.payload.name],
+        action.payload,
+      ];
+    },
+    deleteDataDlx: (state, action) => {
+      state[action.payload.name] = state[action.payload.name].filter(
+        (data) => data._id !== action.payload._id
+      );
     },
   },
   extraReducers: {
-    [createSanhoc.pending]: (state, action) => {
+    [createData.pending]: (state, action) => {
       state.loading = true;
     },
-    [createSanhoc.fulfilled]: (state, action) => {
+    [createData.fulfilled]: (state, action) => {
       state.loading = false;
-      state.sanhoc = [...state.sanhoc, action.payload];
+      state[action.payload.name] = [
+        ...state[action.payload.name],
+        action.payload.data,
+      ];
     },
-    [createSanhoc.rejected]: (state, action) => {
+    [createData.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload.message;
     },
@@ -82,6 +106,9 @@ const dlxSlice = createSlice({
     [getAllByUser.fulfilled]: (state, action) => {
       state.loading = false;
       state.sanhoc = action.payload.sanhoc;
+      state.nguon = action.payload.nguon;
+      state.truongthi = action.payload.truongthi;
+      state.khoathi = action.payload.khoathi;
     },
     [getAllByUser.rejected]: (state, action) => {
       state.loading = false;
@@ -90,6 +117,6 @@ const dlxSlice = createSlice({
   },
 });
 
-export const { setData } = dlxSlice.actions;
+export const { deleteDataDlx } = dlxSlice.actions;
 
 export default dlxSlice.reducer;

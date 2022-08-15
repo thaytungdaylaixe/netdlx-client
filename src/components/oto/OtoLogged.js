@@ -7,13 +7,14 @@ import Footer from "../footer";
 import Header from "../header";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
+import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
+
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
-import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
-
-import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
 const OtoLogged = () => {
@@ -40,6 +41,11 @@ const OtoLogged = () => {
         text: "Nhà đất",
         link: "/nhadat",
         icon: <HomeWorkOutlinedIcon />,
+      },
+      {
+        text: "Mua bán Ôtô",
+        link: "/oto",
+        icon: <DirectionsCarFilledOutlinedIcon />,
       },
 
       { divider: true },

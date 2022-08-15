@@ -6,6 +6,9 @@ import Footer from "../footer";
 import Header from "../header";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
+import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 
 import LoginIcon from "@mui/icons-material/Login";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
@@ -14,20 +17,32 @@ const HomeLayOut = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
   const outlet = useOutlet();
 
-  if (user) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
   const MenuItems = {
     left: [
-      { text: "Trang chủ", icon: <HomeOutlinedIcon />, link: "/" },
-      { text: "Trang chủ", icon: <HomeOutlinedIcon />, link: "/" },
+      {
+        text: "Trang chủ",
+        link: "/",
+        icon: <HomeOutlinedIcon />,
+      },
+      {
+        text: "Dạy lái xe",
+        link: "/daylaixe",
+        icon: <AutoStoriesOutlinedIcon />,
+      },
+      {
+        text: "Nhà đất",
+        link: "/nhadat",
+        icon: <HomeWorkOutlinedIcon />,
+      },
+      {
+        text: "Mua bán Ôtô",
+        link: "/oto",
+        icon: <DirectionsCarFilledOutlinedIcon />,
+      },
 
       {
         divider: true,
       },
-      { text: "Trang chủ", icon: <HomeOutlinedIcon />, link: "/" },
-      { text: "Trang chủ", icon: <HomeOutlinedIcon />, link: "/" },
     ],
     right: [
       { text: "Đăng nhập", icon: <LoginIcon />, link: "/users/login" },

@@ -7,13 +7,13 @@ import Footer from "../footer";
 import Header from "../header";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
+import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
+
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-
-import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
-
-import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 
@@ -34,6 +34,11 @@ const DlxLogged = () => {
         text: "Trang chủ",
         link: "/",
         icon: <HomeOutlinedIcon />,
+      },
+      {
+        text: "Dạy lái xe",
+        link: "/daylaixe",
+        icon: <AutoStoriesOutlinedIcon />,
       },
       {
         text: "Nhà đất",

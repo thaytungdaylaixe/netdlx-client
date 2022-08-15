@@ -10,7 +10,7 @@ import { CssBaseline, Button, Box, Typography, Container } from "@mui/material";
 import Loading from "../../loading/index";
 import Input from "../../form/Input";
 import Select from "../../form/Select";
-import { trimText, Valid, ValidDangky } from "../../../utils/valid";
+import { trimText, Valid } from "../../../utils/valid";
 import DateTimeMui from "../../form/DateTimeMui";
 
 import ChildModal from "./ChildModal";
@@ -20,8 +20,13 @@ import { getAllByUser } from "../../../redux/slices/dlxSlice";
 const theme = createTheme();
 
 const Register = () => {
-  const { loading, user } = useSelector((state) => ({ ...state.auth }));
-  const { sanhoc } = useSelector((state) => ({ ...state.datadlx }));
+  const { user } = useSelector((state) => ({ ...state.auth }));
+  const { sanhoc, nguon, truongthi, khoathi, loading } = useSelector(
+    (state) => ({ ...state.datadlx })
+  );
+  const { datadlx } = useSelector((state) => ({ ...state }));
+
+  console.log(datadlx);
 
   const idUser = user?.result?._id;
 
@@ -75,8 +80,6 @@ const Register = () => {
     const name = trimText(data.name.toString());
 
     const value = trimText(data.value.toString());
-
-    console.log(name, value);
 
     if (Valid(name, value) === null) {
       if (errors) {
@@ -150,14 +153,14 @@ const Register = () => {
       type: "modal",
     },
 
-    { id: "nguon", label: "Nguồn", option: [], type: "modal" },
+    { id: "nguon", label: "Nguồn", option: nguon, type: "modal" },
     {
       id: "truongthi",
       label: "Trường thi",
-      option: [],
+      option: truongthi,
       type: "modal",
     },
-    { id: "khoathi", label: "Khóa thi", option: [], type: "modal" },
+    { id: "khoathi", label: "Khóa thi", option: khoathi, type: "modal" },
   ];
 
   return (
@@ -165,8 +168,8 @@ const Register = () => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Loading loading={loading} />
-
         <button onClick={testDisPatch}> Tesst</button>
+
         <Box
           sx={{
             marginTop: 8,
@@ -178,12 +181,7 @@ const Register = () => {
           <Typography component="h1" variant="h5">
             Thêm học viên
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" noValidate sx={{ mt: 1 }}>
             {inputForm.map((ip, i) => (
               <Fragment key={i}>
                 {ip.type === "select" && (
@@ -232,7 +230,11 @@ const Register = () => {
             ))}
 
             <Box sx={{ display: "flex", justifyContent: "space-around" }}>
-              <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+              <Button
+                onClick={handleSubmit}
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
                 Thêm
               </Button>
               <Button
@@ -254,6 +256,8 @@ const Register = () => {
 };
 
 export default Register;
+
+// <button onClick={testDisPatch}> Tesst</button>
 
 // sanhoc: "",
 // nguon: "",

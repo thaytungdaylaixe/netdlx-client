@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postData } from "../api";
 
+import Cookies from "js-cookie";
+
 export const login = createAsyncThunk(
   "auth/login",
   async ({ formValue, navigate, toast }, { rejectWithValue }) => {
@@ -8,7 +10,7 @@ export const login = createAsyncThunk(
       const response = await postData("/users/signin", formValue);
 
       toast.success("Đăng nhập thành công.");
-      navigate("/dashboard");
+      navigate(-1);
 
       return response.data;
     } catch (err) {
@@ -25,7 +27,7 @@ export const register = createAsyncThunk(
       const response = await postData("/users/signup", formValue);
 
       toast.success("Đăng ký thành công.");
-      navigate("/dashboard");
+      navigate(-1);
 
       return response.data;
     } catch (err) {
@@ -49,6 +51,7 @@ const authSlice = createSlice({
     setLogout: (state, action) => {
       localStorage.clear();
       state.user = null;
+      Cookies.remove("refresh_token");
     },
   },
   extraReducers: {
@@ -57,8 +60,14 @@ const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.loading = false;
-      localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
-      state.user = action.payload;
+      localStorage.setItem(
+        "profile",
+        JSON.stringify({ ...action.payload.result })
+      );
+
+      Cookies.set("refresh_token", action.payload.token);
+      state.token = action.payload.token;
+      state.user = action.payload.result;
     },
     [login.rejected]: (state, action) => {
       state.loading = false;
@@ -70,8 +79,14 @@ const authSlice = createSlice({
     },
     [register.fulfilled]: (state, action) => {
       state.loading = false;
-      localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
-      state.user = action.payload;
+      localStorage.setItem(
+        "profile",
+        JSON.stringify({ ...action.payload.result })
+      );
+
+      Cookies.set("refresh_token", action.payload.token);
+      state.token = action.payload.token;
+      state.user = action.payload.result;
     },
     [register.rejected]: (state, action) => {
       state.loading = false;

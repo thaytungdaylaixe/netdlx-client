@@ -7,13 +7,13 @@ import Footer from "../footer";
 import Header from "../header";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
+import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
+import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
+
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-
-import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
-
-import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
 const NdLogged = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
@@ -36,11 +36,21 @@ const NdLogged = () => {
         icon: <AutoStoriesOutlinedIcon />,
       },
       {
+        text: "Nhà đất",
+        link: "/nhadat",
+        icon: <HomeWorkOutlinedIcon />,
+      },
+      {
         text: "Mua bán Ôtô",
         link: "/oto",
         icon: <DirectionsCarFilledOutlinedIcon />,
       },
       { divider: true },
+      {
+        text: "Đăng tin",
+        link: "/nhadat/dangtin",
+        icon: <DirectionsCarFilledOutlinedIcon />,
+      },
     ],
     right: [
       {

@@ -6,16 +6,12 @@ import styles from "../css/Layout.module.css";
 import Footer from "../footer";
 import Header from "../header";
 
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
-
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
-
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 
 const Logged = () => {
