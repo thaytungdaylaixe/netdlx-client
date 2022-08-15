@@ -7,12 +7,7 @@ import { setLogout } from "../redux/slices/authSlice";
 const SignOut = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    dispatch(setLogout());
-
-    navigate("/");
-  });
+  navigate("/");
 
   return (
     <>
