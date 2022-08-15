@@ -10,6 +10,9 @@ export const login = createAsyncThunk(
       const response = await postData("/users/signin", formValue);
 
       toast.success("Đăng nhập thành công.");
+
+      console.log(window.location.pathname);
+
       navigate(-1 || "/dashboard");
 
       return response.data;
