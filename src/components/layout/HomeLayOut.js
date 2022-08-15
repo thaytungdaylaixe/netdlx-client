@@ -1,5 +1,4 @@
-import { Navigate, useOutlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useOutlet } from "react-router-dom";
 
 import styles from "../css/Layout.module.css";
 import Footer from "../footer";
@@ -14,7 +13,6 @@ import LoginIcon from "@mui/icons-material/Login";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
 
 const HomeLayOut = () => {
-  const { user } = useSelector((state) => ({ ...state.auth }));
   const outlet = useOutlet();
 
   const MenuItems = {
@@ -56,7 +54,7 @@ const HomeLayOut = () => {
 
   return (
     <>
-      <Header MenuItems={MenuItems} user={user} />
+      <Header MenuItems={MenuItems} />
       <div className={styles.main}>{outlet}</div> <Footer />
     </>
   );

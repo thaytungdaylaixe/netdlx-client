@@ -1,8 +1,6 @@
 import { ToastContainer } from "react-toastify";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
-
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -40,9 +38,6 @@ import OtoAddEdit from "./pages/oto/OtoAddEdit";
 import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
-  const { user } = useSelector((state) => ({
-    ...state.auth,
-  }));
   return (
     <BrowserRouter>
       <ToastContainer

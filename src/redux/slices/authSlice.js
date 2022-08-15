@@ -27,7 +27,7 @@ export const register = createAsyncThunk(
       const response = await postData("/users/signup", formValue);
 
       toast.success("Đăng ký thành công.");
-      navigate(-1);
+      navigate(-1 || "/dashboard");
 
       return response.data;
     } catch (err) {
