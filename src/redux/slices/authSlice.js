@@ -11,9 +11,7 @@ export const login = createAsyncThunk(
 
       toast.success("Đăng nhập thành công.");
 
-      console.log(window.location.pathname);
-
-      navigate(-1 || "/dashboard");
+      navigate(-1);
 
       return response.data;
     } catch (err) {
@@ -30,7 +28,7 @@ export const register = createAsyncThunk(
       const response = await postData("/users/signup", formValue);
 
       toast.success("Đăng ký thành công.");
-      navigate(-1 || "/dashboard");
+      navigate(-1);
 
       return response.data;
     } catch (err) {

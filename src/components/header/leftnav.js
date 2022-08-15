@@ -14,17 +14,24 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-export default function LeftNav(props) {
-  const { hovaten, menuLeft } = props;
+const hoten = (hovaten) => {
+  if (hovaten) {
+    const myArray = hovaten.split(" ");
+    return myArray.length > 1
+      ? myArray[0] + " " + myArray[myArray.length - 1]
+      : myArray[0];
+  }
+};
 
-  const hoten = (hovaten) => {
-    if (hovaten) {
-      const myArray = hovaten.split(" ");
-      return myArray.length > 1
-        ? myArray[0] + " " + myArray[myArray.length - 1]
-        : myArray[0];
-    }
-  };
+export default function LeftNav(props) {
+  const {
+    MenuItems: { left },
+    user,
+  } = props;
+
+  console.log(left);
+
+  const hovaten = user?.result?.hovaten;
 
   const [stateNav, setState] = useState({
     top: false,
@@ -44,7 +51,7 @@ export default function LeftNav(props) {
     setState({ ...stateNav, [anchor]: open });
   };
 
-  const left = (anchor) => (
+  const leftSlide = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
@@ -52,7 +59,7 @@ export default function LeftNav(props) {
       onKeyDown={props.clickClose}
     >
       <List>
-        {menuLeft.map((navlink, index) =>
+        {left.map((navlink, index) =>
           navlink.divider ? (
             <Divider key={index} />
           ) : (
@@ -101,7 +108,7 @@ export default function LeftNav(props) {
         open={stateNav["left"]}
         onClose={toggleDrawer("left", false)}
       >
-        {left("left")}
+        {leftSlide("left")}
       </Drawer>
     </>
   );

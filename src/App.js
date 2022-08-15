@@ -13,7 +13,6 @@ import HomeTrangchu from "./components/home/trangchu";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import SignOut from "./pages/SignOut";
 
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
@@ -68,7 +67,6 @@ function App() {
           <Route path="" element={<HomeTrangchu />} />
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
-          <Route path="logout" element={<SignOut />} />
         </Route>
 
         <Route path="/daylaixe" element={<DlxLogged />}>

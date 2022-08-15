@@ -13,8 +13,6 @@ export default function RightNav(props) {
     right: false,
   });
 
-  const { menuRight } = props;
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -41,10 +39,7 @@ export default function RightNav(props) {
         open={stateNav["right"]}
         onClose={toggleDrawer("right", false)}
       >
-        <RightSlideNav
-          menuRight={menuRight}
-          onClose={toggleDrawer("right", false)}
-        />
+        <RightSlideNav {...props} onClose={toggleDrawer("right", false)} />
       </Drawer>
     </>
   );

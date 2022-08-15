@@ -11,22 +11,20 @@ import LeftNav from "./leftnav";
 import RightNav from "./rightnav";
 
 export default function NavBar(props) {
-  const { user, MenuItems } = props;
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed">
         <Toolbar>
-          <LeftNav menuLeft={MenuItems.left} hovaten={user?.result?.hovaten} />
+          <LeftNav {...props} />
           <Box sx={{ flexGrow: 1 }} />
           <IconButton size="large" aria-label="search" color="inherit">
             <SearchIcon />
           </IconButton>
-          <RightNav menuRight={MenuItems.right} />
+          <RightNav {...props} />
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
-
+// <LeftNav menuLeft={MenuItems.left} hovaten={user?.result?.hovaten} />
 // <RightNav menuRight={menuRight} />

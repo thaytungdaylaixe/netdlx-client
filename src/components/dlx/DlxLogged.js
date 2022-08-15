@@ -1,5 +1,7 @@
 import { Navigate, useOutlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { setLogout } from "../../redux/slices/authSlice";
 
 import styles from "../css/Layout.module.css";
 
@@ -11,16 +13,21 @@ import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
 import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
 import DirectionsCarFilledOutlinedIcon from "@mui/icons-material/DirectionsCarFilledOutlined";
 
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 
 const DlxLogged = () => {
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => ({
     ...state.auth,
   }));
+
+  const Logout = () => {
+    dispatch(setLogout());
+    <Navigate to="/" replace />;
+  };
 
   const outlet = useOutlet();
 
@@ -58,11 +65,6 @@ const DlxLogged = () => {
       },
     ],
     right: [
-      {
-        text: "Thoát",
-        link: "/dashboard/logout",
-        icon: <LogoutOutlinedIcon />,
-      },
       { divider: true },
       {
         text: "Profile",
@@ -79,7 +81,7 @@ const DlxLogged = () => {
 
   return (
     <>
-      <Header MenuItems={MenuItems} user={user} />
+      <Header MenuItems={MenuItems} user={user} Logout={Logout} />
       <div className={styles.main}>{outlet}</div>
 
       <Footer />

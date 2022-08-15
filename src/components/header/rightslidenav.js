@@ -9,10 +9,18 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 
-export default function RightSlideNav(props) {
-  const { menuRight, onClose } = props;
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 
-  const right = (anchor) => (
+export default function RightSlideNav(props) {
+  const {
+    MenuItems: { right },
+    onClose,
+    Logout,
+  } = props;
+
+  console.log(props);
+
+  const rightSlide = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
@@ -20,7 +28,20 @@ export default function RightSlideNav(props) {
       onKeyDown={onClose}
     >
       <List>
-        {menuRight.map((navlink, index) =>
+        <ListItem disablePadding onClick={Logout}>
+          <ListItemButton>
+            <ListItemIcon sx={{ color: "#1976D2" }}>
+              <LogoutOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText
+              sx={{ color: "#1976D2" }}
+              primary="Thoát"
+              // secondary="testing"
+            />
+          </ListItemButton>
+        </ListItem>
+
+        {right.map((navlink, index) =>
           navlink.divider ? (
             <Divider key={index} />
           ) : (
@@ -45,5 +66,5 @@ export default function RightSlideNav(props) {
     </Box>
   );
 
-  return <>{right("abc")}</>;
+  return <>{rightSlide("abc")}</>;
 }
