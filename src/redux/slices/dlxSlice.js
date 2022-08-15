@@ -1,11 +1,27 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postData } from "../api";
 
-// export const updateData = createAsyncThunk('data/update', async (params, {dispatch}) => {
-//   const result = await sdkClient.update({ params })
-//   dispatch(getData())
-//   return result
-// })
+export const updateData = createAsyncThunk(
+  "datadlx/updateData",
+  async ({ formValue, navigate, toast }, { dispatch, rejectWithValue }) => {
+    try {
+      const { name, label, editData } = formValue;
+
+      const response = await postData("/dlx/updatedata", formValue);
+
+      const { data } = response;
+
+      await dispatch(deleteDataDlx(formValue));
+      await dispatch(pushDataDlx({ ...data, name }));
+
+      toast.success("Sửa " + label + " thành công.");
+      return { name, editData, data };
+    } catch (err) {
+      console.log(err);
+      return rejectWithValue(err.response.data);
+    }
+  }
+);
 
 export const createData = createAsyncThunk(
   "datadlx/createSanhoc",
@@ -79,6 +95,7 @@ const dlxSlice = createSlice({
       ];
     },
     deleteDataDlx: (state, action) => {
+      console.log(action.payload);
       state[action.payload.name] = state[action.payload.name].filter(
         (data) => data._id !== action.payload._id
       );
@@ -117,6 +134,6 @@ const dlxSlice = createSlice({
   },
 });
 
-export const { deleteDataDlx } = dlxSlice.actions;
+export const { pushDataDlx, deleteDataDlx } = dlxSlice.actions;
 
 export default dlxSlice.reducer;

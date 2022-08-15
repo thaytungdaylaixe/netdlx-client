@@ -60,14 +60,11 @@ const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       state.loading = false;
-      localStorage.setItem(
-        "profile",
-        JSON.stringify({ ...action.payload.result })
-      );
+      localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
 
       Cookies.set("refresh_token", action.payload.token);
-      state.token = action.payload.token;
-      state.user = action.payload.result;
+
+      state.user = action.payload;
     },
     [login.rejected]: (state, action) => {
       state.loading = false;
@@ -79,14 +76,11 @@ const authSlice = createSlice({
     },
     [register.fulfilled]: (state, action) => {
       state.loading = false;
-      localStorage.setItem(
-        "profile",
-        JSON.stringify({ ...action.payload.result })
-      );
+      localStorage.setItem("profile", JSON.stringify({ ...action.payload }));
 
       Cookies.set("refresh_token", action.payload.token);
-      state.token = action.payload.token;
-      state.user = action.payload.result;
+
+      state.user = action.payload;
     },
     [register.rejected]: (state, action) => {
       state.loading = false;

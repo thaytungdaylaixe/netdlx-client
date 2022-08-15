@@ -26,7 +26,7 @@ const Register = () => {
   );
   const { datadlx } = useSelector((state) => ({ ...state }));
 
-  console.log(datadlx);
+  // console.log(datadlx);
 
   const idUser = user?.result?._id;
 
@@ -69,7 +69,7 @@ const Register = () => {
     //   return setErrors(ValidDK.errors);
     // }
 
-    console.log(formValue);
+    // console.log(formValue);
 
     // await dispatch(register({ formValue, navigate, toast }));
   };

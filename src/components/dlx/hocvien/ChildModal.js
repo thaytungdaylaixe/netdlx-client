@@ -1,4 +1,4 @@
-import React, { cloneElement, Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
@@ -8,7 +8,7 @@ import { Box, Modal, Button, TextField } from "@mui/material";
 import {
   createData,
   deleteByUser,
-  deleteDataDlx,
+  updateData,
 } from "../../../redux/slices/dlxSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -62,21 +62,24 @@ const ChildModal = (props) => {
   };
   const handleClose = () => {
     setOpen(false);
+    setEditData(false);
+    setData("");
   };
 
   const addButtonAction = async (e) => {
     e.preventDefault();
 
-    const formValue = { idUser, name, label, value: data };
+    if (data !== "") {
+      const formValue = { idUser, name, label, value: data };
+      let o = option.find((o) => o.value === data);
 
-    let o = option.find((o) => o.value === data);
+      if (!o) {
+        await dispatch(createData({ formValue, navigate, toast }));
+        setData("");
+      } else toast.error(label + " " + data + " đã tồn tại.");
 
-    if (!o) {
-      await dispatch(createData({ formValue, navigate, toast }));
-      setData("");
-    } else toast.error(label + " " + data + " đã tồn tại.");
-
-    setDataInputButton(data);
+      setDataInputButton(data);
+    } else toast.error("Bạn chưa nhập " + label + ".");
   };
 
   const deleteAction = async (data) => {
@@ -85,8 +88,32 @@ const ChildModal = (props) => {
     await dispatch(deleteByUser({ formValue, navigate, toast }));
   };
 
-  const editAction = async (e) => {
-    console.log("editAction");
+  const [editData, setEditData] = useState(false);
+
+  const editAction = async () => {
+    if (data !== "") {
+      const formValue = { ...editData, name, label, newValue: data };
+      let o = option.find((o) => o.value === data);
+
+      if (!o) {
+        await dispatch(updateData({ formValue, navigate, toast }));
+        setData("");
+      } else toast.error(label + " " + data + " đã tồn tại.");
+
+      setDataInputButton(data);
+    } else toast.error("Bạn chưa nhập " + label + ".");
+
+    CancelAction();
+  };
+
+  const editClick = async (opt) => {
+    setData(opt.value);
+    setEditData(opt);
+  };
+
+  const CancelAction = async () => {
+    setEditData(false);
+    setData("");
   };
 
   return (
@@ -135,14 +162,32 @@ const ChildModal = (props) => {
               />
             </Box>
             <Box style={{ display: "flex", justifyContent: "space-around" }}>
-              <Button
-                margin="normal"
-                size="small"
-                variant="contained"
-                sx={{ width: 60 }}
-                onClick={addButtonAction}
-              >
-                Thêm
+              {!editData && (
+                <Button
+                  margin="normal"
+                  size="small"
+                  variant="contained"
+                  sx={{ width: 60 }}
+                  onClick={addButtonAction}
+                >
+                  Thêm
+                </Button>
+              )}
+
+              {editData && (
+                <Button
+                  margin="normal"
+                  size="small"
+                  variant="contained"
+                  sx={{ width: 60 }}
+                  onClick={editAction}
+                >
+                  Sửa
+                </Button>
+              )}
+
+              <Button color="warning" onClick={CancelAction}>
+                Cancel
               </Button>
               <Button
                 color="error"
@@ -167,7 +212,7 @@ const ChildModal = (props) => {
                           value.toLowerCase().includes(data.toLowerCase())
                         )
                         .sort((a, b) => {
-                          return a.value - b.value;
+                          return a.value.localeCompare(b.value);
                         })
                         .map((opt, i) => (
                           <Fragment key={i}>
@@ -177,7 +222,10 @@ const ChildModal = (props) => {
                                   <Button
                                     size="small"
                                     sx={{ minWidth: "0" }}
-                                    onClick={editAction}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      editClick(opt);
+                                    }}
                                   >
                                     <ModeEditOutlineOutlinedIcon />
                                   </Button>
