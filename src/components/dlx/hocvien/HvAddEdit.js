@@ -16,31 +16,23 @@ import DateTimeMui from "../../form/DateTimeMui";
 import ChildModal from "./ChildModal";
 
 import { getAllByUser } from "../../../redux/slices/dlxSlice";
+import { createData } from "../../../redux/slices/hvSlice";
 
 const theme = createTheme();
 
-const Register = () => {
+const AddEdit = () => {
   const { user } = useSelector((state) => ({ ...state.auth }));
+  const { hv_loading } = useSelector((state) => ({ ...state.hv }));
   const { sanhoc, nguon, truongthi, khoathi, loading } = useSelector(
     (state) => ({ ...state.datadlx })
   );
-  const { datadlx } = useSelector((state) => ({ ...state }));
-
-  // console.log(datadlx);
 
   const idUser = user?.result?._id;
-
-  const testDisPatch = async () => {
-    if (idUser) {
-      await dispatch(getAllByUser(idUser));
-    }
-  };
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formValue, setFormValue] = useState({
-    iduser: user?.result?._id,
     sdt: "",
     hovaten: "",
     ngaysinh: new Date(),
@@ -58,10 +50,13 @@ const Register = () => {
 
     hinhanh: [],
     tags: [],
+    luong: 0,
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // console.log(formValue);
 
     // const ValidDK = await ValidDangky(formValue);
 
@@ -71,14 +66,13 @@ const Register = () => {
 
     // console.log(formValue);
 
-    // await dispatch(register({ formValue, navigate, toast }));
+    await dispatch(createData({ formValue, navigate, toast }));
   };
 
   const [errors, setErrors] = useState({});
 
   const inputChange = (data) => {
     const name = trimText(data.name.toString());
-
     const value = trimText(data.value.toString());
 
     if (Valid(name, value) === null) {
@@ -168,7 +162,7 @@ const Register = () => {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Loading loading={loading} />
-        <button onClick={testDisPatch}> Tesst</button>
+        <Loading loading={hv_loading} />
 
         <Box
           sx={{
@@ -255,7 +249,7 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default AddEdit;
 
 // <button onClick={testDisPatch}> Tesst</button>
 

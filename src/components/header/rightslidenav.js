@@ -19,8 +19,6 @@ export default function RightSlideNav(props) {
     user,
   } = props;
 
-  console.log(props);
-
   const rightSlide = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
