@@ -16,6 +16,7 @@ export default function RightSlideNav(props) {
     MenuItems: { right },
     onClose,
     Logout,
+    user,
   } = props;
 
   console.log(props);
@@ -28,18 +29,20 @@ export default function RightSlideNav(props) {
       onKeyDown={onClose}
     >
       <List>
-        <ListItem disablePadding onClick={Logout}>
-          <ListItemButton>
-            <ListItemIcon sx={{ color: "#1976D2" }}>
-              <LogoutOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText
-              sx={{ color: "#1976D2" }}
-              primary="Thoát"
-              // secondary="testing"
-            />
-          </ListItemButton>
-        </ListItem>
+        {user && (
+          <ListItem disablePadding onClick={Logout}>
+            <ListItemButton>
+              <ListItemIcon sx={{ color: "#1976D2" }}>
+                <LogoutOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText
+                sx={{ color: "#1976D2" }}
+                primary="Thoát"
+                // secondary="testing"
+              />
+            </ListItemButton>
+          </ListItem>
+        )}
 
         {right.map((navlink, index) =>
           navlink.divider ? (

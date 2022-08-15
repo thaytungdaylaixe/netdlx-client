@@ -29,8 +29,6 @@ export default function LeftNav(props) {
     user,
   } = props;
 
-  console.log(left);
-
   const hovaten = user?.result?.hovaten;
 
   const [stateNav, setState] = useState({
