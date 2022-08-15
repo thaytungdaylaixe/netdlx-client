@@ -10,7 +10,7 @@ export const login = createAsyncThunk(
       const response = await postData("/users/signin", formValue);
 
       toast.success("Đăng nhập thành công.");
-      navigate(-1);
+      navigate(-1 || "/dashboard");
 
       return response.data;
     } catch (err) {
