@@ -17,7 +17,10 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
+import AvataName from "./AvatarName";
+
 moment.locale("vi");
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -39,13 +42,9 @@ export default function RecipeReviewCard(props) {
   };
 
   return (
-    <Card sx={{ maxWidth: "100%" }}>
+    <Card sx={{ maxWidth: "100%", marginBottom: "15px" }}>
       <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
-        }
+        avatar={<AvataName hovaten={hovaten} />}
         action={
           <IconButton aria-label="settings">
             <MoreVertIcon />

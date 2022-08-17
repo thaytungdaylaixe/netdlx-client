@@ -5,8 +5,9 @@ import { setLogout } from "../../redux/slices/authSlice";
 
 import styles from "../css/Layout.module.css";
 
-import Footer from "../footer";
 import Header from "../header";
+import Footer from "../footer";
+import BottomApp from "../bottomapp";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AutoStoriesOutlinedIcon from "@mui/icons-material/AutoStoriesOutlined";
@@ -17,6 +18,32 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import ScheduleOutlinedIcon from "@mui/icons-material/ScheduleOutlined";
+
+const BottomAppData = [
+  {
+    label: "Trang chủ",
+    value: "/daylaixe/trangchu",
+    icon: <DirectionsCarFilledOutlinedIcon />,
+  },
+  {
+    label: "Học viên",
+    value: "/daylaixe/hocvien",
+    icon: <PeopleOutlinedIcon />,
+  },
+  {
+    label: "Lịch thi",
+    value: "/daylaixe/lichthi",
+    icon: <CalendarMonthIcon />,
+  },
+  {
+    label: "TKB",
+    value: "/daylaixe/thoikhoabieu",
+    icon: <ScheduleOutlinedIcon />,
+  },
+];
 
 const DlxLogged = () => {
   const dispatch = useDispatch();
@@ -58,11 +85,6 @@ const DlxLogged = () => {
         icon: <DirectionsCarFilledOutlinedIcon />,
       },
       { divider: true },
-      {
-        text: "Học viên",
-        link: "/daylaixe/hocvien",
-        icon: <PeopleOutlinedIcon />,
-      },
     ],
     right: [
       { divider: true },
@@ -85,6 +107,7 @@ const DlxLogged = () => {
       <div className={styles.main}>{outlet}</div>
 
       <Footer />
+      <BottomApp BottomAppData={BottomAppData} />
     </>
   );
 };

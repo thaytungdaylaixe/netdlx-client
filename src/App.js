@@ -24,6 +24,9 @@ import DlxTrangChu from "./components/dlx/dlxtrangchu";
 import Hocvien from "./components/dlx/hocvien/HocVien";
 import HvAddEdit from "./components/dlx/hocvien/HvAddEdit";
 
+import Tkb from "./pages/dlx/Tkb";
+import DlxLichThi from "./pages/dlx/DlxLichThi";
+
 import NdLogged from "./components/nhadat/NdLogged";
 import NdTrangChu from "./components/nhadat/ndtrangchu";
 import NdHome from "./pages/nhadat/NdHome";
@@ -72,6 +75,8 @@ function App() {
         <Route path="/daylaixe" element={<DlxLogged />}>
           <Route path="trangchu" element={<DlxTrangChu />} />
           <Route path="hocvien" element={<Hocvien />} />
+          <Route path="lichthi" element={<DlxLichThi />} />
+          <Route path="thoikhoabieu" element={<Tkb />} />
           <Route path="add" element={<HvAddEdit />} />
           <Route path="edit/:id" element={<HvAddEdit />} />
         </Route>

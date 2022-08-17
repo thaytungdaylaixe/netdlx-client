@@ -31,7 +31,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "git": "git add . && git commit -am \"Ok\" && git push heroku head:master && git push && cd.. && cd server && npm run git"
+    "git": "git add . && git commit -am \"Ok\" && git push heroku head:master && git push && cd.. && cd server && npm run git",
+    "githrk": "git add . && git commit -am \"Ok\" && git push heroku head:master && git push"
   },
   "eslintConfig": {
     "extends": [

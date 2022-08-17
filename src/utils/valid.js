@@ -12,12 +12,31 @@ export const checkTextEmpty = (text) => {
   return null;
 };
 
+export const Validate = (formValue) => {
+  let errors = {};
+
+  for (const [key, value] of Object.entries(formValue)) {
+    delete errors[key];
+    let check = Valid(key, value);
+    if (check) errors[key] = check;
+  }
+
+  return errors;
+};
+
 export const Valid = (name, value) => {
+  value = trimText(value.toString());
+
   switch (name) {
     case "sdt":
       if (value === "") return "Bạn chưa nhập số điện thoại.";
       if (!validateNumber(value)) return "Số điện thoại không đúng.";
       if (value.length < 10) return "Số điện thoại không đủ.";
+      return null;
+
+    case "sogiohoc":
+      if (value === "") return "Bạn chưa nhập số giờ học.";
+      if (!validateNumber(value)) return "Số giờ học không đúng.";
       return null;
 
     case "hovaten":

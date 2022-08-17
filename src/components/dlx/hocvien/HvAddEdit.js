@@ -10,7 +10,7 @@ import { CssBaseline, Button, Box, Typography, Container } from "@mui/material";
 import Loading from "../../loading/index";
 import Input from "../../form/Input";
 import Select from "../../form/Select";
-import { trimText, Valid } from "../../../utils/valid";
+import { Validate } from "../../../utils/valid";
 import DateTimeMui from "../../form/DateTimeMui";
 
 import ChildModal from "./ChildModal";
@@ -38,7 +38,6 @@ const AddEdit = () => {
     ngaysinh: new Date(),
     sogiohoc: "",
     ngayvaokhoa: new Date(),
-
     sanhoc: "",
     nguon: "",
     truongthi: "",
@@ -47,7 +46,6 @@ const AddEdit = () => {
     thitn: [],
     thish: [],
     ghichu: [],
-
     hinhanh: [],
     tags: [],
     luong: 0,
@@ -56,32 +54,33 @@ const AddEdit = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // console.log(formValue);
+    const ValidateForm = await Validate(formValue);
 
-    // const ValidDK = await ValidDangky(formValue);
-
-    // if (ValidDK.countErrors > 0) {
-    //   return setErrors(ValidDK.errors);
-    // }
-
-    // console.log(formValue);
+    if (Object.keys(ValidateForm).length > 0) {
+      return setErrors(ValidateForm);
+    }
 
     await dispatch(createData({ formValue, navigate, toast }));
   };
 
   const [errors, setErrors] = useState({});
 
-  const inputChange = (data) => {
-    const name = trimText(data.name.toString());
-    const value = trimText(data.value.toString());
+  const inputChange = async (data) => {
+    const name = data.name.toString();
+    const value = data.value.toString();
 
-    if (Valid(name, value) === null) {
-      if (errors) {
-        const newErrors = { ...errors };
-        delete newErrors[name]; // or whichever key you want
-        setErrors(newErrors);
-      }
-    } else setErrors({ ...errors, [name]: Valid(name, value) });
+    var object = {};
+    object[name] = value;
+
+    const ValidateForm = await Validate(object);
+
+    if (Object.keys(ValidateForm).length > 0) {
+      setErrors({ ...errors, [name]: ValidateForm[name] });
+    } else {
+      const newErrors = { ...errors };
+      delete newErrors[name];
+      setErrors(newErrors);
+    }
 
     if (name === "cf_password") {
       if (formValue.password !== value) {

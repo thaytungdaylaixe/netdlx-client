@@ -52,8 +52,6 @@ export const getAllByUser = createAsyncThunk(
     try {
       const response = await postData("/dlx/hocvien/getall", { idUser });
 
-      console.log(response.data);
-
       return response.data;
     } catch (err) {
       console.log(err);

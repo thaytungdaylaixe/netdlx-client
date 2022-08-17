@@ -11,6 +11,15 @@ import { getAllByUser } from "../../../redux/slices/hvSlice";
 
 import CardMui from "../../form/CardMui";
 
+const SortFullName = (fullname) => {
+  return [...fullname].sort((a, b) => {
+    let a_sp = a.hovaten.split(" ")[a.hovaten.split(" ").length - 1];
+    let b_sp = b.hovaten.split(" ")[b.hovaten.split(" ").length - 1];
+
+    return a_sp.localeCompare(b_sp);
+  });
+};
+
 const HocVien = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,14 +28,6 @@ const HocVien = () => {
   const { hv } = useSelector((state) => ({ ...state.hv }));
 
   const idUser = user?.result?._id;
-
-  console.log(hv);
-
-  // dispatch(dlx({ idUser: user.result._id }));
-
-  // const { dtdlx } = useSelector((state) => ({ ...state.datadlx }));
-
-  // console.log(dtdlx);
 
   useEffect(() => {
     async function dispatchAll(idUser) {
@@ -40,7 +41,7 @@ const HocVien = () => {
 
   return (
     <>
-      {hv.map((infoHv, i) => (
+      {SortFullName(hv).map((infoHv, i) => (
         <CardMui {...infoHv} key={i} style={{ paddingLeft: "15px" }} />
       ))}
 
@@ -48,8 +49,8 @@ const HocVien = () => {
         sx={{
           "& > :not(style)": { m: 1 },
           position: "fixed",
-          bottom: 20,
-          right: 20,
+          bottom: 60,
+          right: 10,
         }}
         onClick={() => {
           navigate("/daylaixe/add");

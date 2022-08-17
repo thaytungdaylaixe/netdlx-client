@@ -1,10 +1,8 @@
 import React from "react";
-
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-
 import SearchIcon from "@mui/icons-material/Search";
 
 import LeftNav from "./leftnav";
@@ -26,5 +24,3 @@ export default function NavBar(props) {
     </Box>
   );
 }
-// <LeftNav menuLeft={MenuItems.left} hovaten={user?.result?.hovaten} />
-// <RightNav menuRight={menuRight} />
